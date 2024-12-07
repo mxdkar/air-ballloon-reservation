@@ -2,7 +2,6 @@ package ballon.com.demo.controller;
 
 import ballon.com.demo.model.Ride;
 import ballon.com.demo.service.RideService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/rides")
 public class RideController {
-    @Autowired
-    private RideService rideService;
+
+    private final RideService rideService;
+
+    public RideController(RideService rideService) {
+        this.rideService = rideService;
+    }
 
     @GetMapping("/available")
     public ResponseEntity<List<Ride>> getAvailableRides(
